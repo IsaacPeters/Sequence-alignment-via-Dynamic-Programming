@@ -1,0 +1,11 @@
+imp2.exe: main.o Alignment.o
+	g++ -std=c++11 -o imp2.exe main.o Alignment.o
+	
+main.o: main.cpp
+	g++ main.cpp -std=c++11 -c
+	
+Alignment.o: Alignment.cpp
+	g++ Alignment.cpp -std=c++11 -c
+	
+clean: 
+	del main.o Alignment.o imp2.exe
