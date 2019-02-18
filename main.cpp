@@ -50,7 +50,7 @@ int main()
         return 1;
     }
 
-    while (!inFile.eof()) {
+    //while (!inFile.eof()) {
         // get a line, will be of the form XXXX,XXXX (number of X's unknown). Store it in temp
         string temp;
         inFile >> temp;
@@ -64,12 +64,12 @@ int main()
 
         // Take these strings and give them to our alignment function to be aligned...
         // alignedString = alignment(firstSequence, secondSequence);
-        string alignedString = alignDNA(firstSequence, secondSequence, costs);
+        Result alignment = alignDNA(firstSequence, secondSequence, costs);
 
         // Store that bad boy in our output file
         //cout << alignedString << "\n";
 
-    }
+    //}
 
     // Find the time we timed :)
     clock_t clockDuration = clock() - startClock;
