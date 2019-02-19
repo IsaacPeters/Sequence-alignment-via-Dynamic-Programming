@@ -49,8 +49,16 @@ int main()
         cout << "Error opening file" << endl;
         return 1;
     }
-
-    //while (!inFile.eof()) {
+    
+    // Create output file for our optimized
+    ofstream outFile("imp2output.txt");
+    if( !inFile.is_open() ) {
+        cout << "Error opening file" << endl;
+        return 1;
+    }
+    int i = 0; 
+    while (/*!inFile.eof()*/ i < 1) {
+        i++;
         // get a line, will be of the form XXXX,XXXX (number of X's unknown). Store it in temp
         string temp;
         inFile >> temp;
@@ -64,12 +72,11 @@ int main()
 
         // Take these strings and give them to our alignment function to be aligned...
         // alignedString = alignment(firstSequence, secondSequence);
-        Result alignment = alignDNA(firstSequence, secondSequence, costs);
+        Result_t alignment = alignDNA(firstSequence, secondSequence, costs);
 
         // Store that bad boy in our output file
-        //cout << alignedString << "\n";
-
-    //}
+        outFile << alignment.finalString << ":" << alignment.editDistance << "\n";
+    }
 
     // Find the time we timed :)
     clock_t clockDuration = clock() - startClock;

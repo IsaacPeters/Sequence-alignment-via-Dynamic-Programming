@@ -1,5 +1,5 @@
 imp2.exe: main.o Alignment.o
-	g++ -std=c++11 -o imp2.exe main.o Alignment.o
+	g++ -g -std=c++11 -o imp2.exe main.o Alignment.o
 	
 main.o: main.cpp
 	g++ main.cpp -std=c++11 -c

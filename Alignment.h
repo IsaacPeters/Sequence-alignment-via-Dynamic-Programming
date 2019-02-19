@@ -8,7 +8,7 @@ using namespace std;
 // Constant declarations
 const int costDim = 6;      // width and height of our cost matrix
 
-struct Result {
+struct Result_t {
     string finalString;
     int editDistance;
 };
@@ -29,6 +29,6 @@ int getIndexOfDNA(char DNA);
  * Both of the stirngs will be the same length with padding:
  * This new string may also contain '-', indicating an empty space.
  **/
-Result alignDNA(string firstSequence, string secondSequence, const int (&costs)[costDim - 1][costDim - 1]);
+Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs)[costDim - 1][costDim - 1]);
 
 #endif // ALIGN_H
