@@ -21,8 +21,14 @@ int getIndexOfDNA(char DNA) {
 }
 
 Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs)[costDim - 1][costDim - 1]) {
+
+        cout << "Test0.1\n";
     int distances[firstSequence.length()][secondSequence.length()] = {{0}};
+
+        cout << "Test0.2\n";
     int backTrace[firstSequence.length()][secondSequence.length()] = {{0}};
+
+        cout << "Test0.3\n";
     Result_t optimalResult;
         
     // for (int i = 0; i < costDim - 1; i++) {
