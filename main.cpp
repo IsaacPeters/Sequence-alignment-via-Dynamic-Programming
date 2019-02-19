@@ -71,17 +71,13 @@ int main()
         string firstSequence = temp.substr(0, commaIndex);
         string secondSequence = temp.substr(commaIndex + 1);
 
-        cout << "Test1\n";
-
 
         // Start a timer
         clock_t startClock = clock();
 
         // Take these strings and give them to our alignment function to be aligned...
         // alignedString = alignment(firstSequence, secondSequence);
-        cout << "Test2\n";
         Result_t alignment = alignDNA(firstSequence, secondSequence, costs);
-        cout << "Test3\n";
 
         // Find the time we timed :)
         clock_t clockDuration = clock() - startClock;
@@ -90,10 +86,6 @@ int main()
 
         // Store that bad boy in our output file
 
-
-        cout << "Test4\n";
         outFile << alignment.finalString << ":" << alignment.editDistance << "\n";
-
-        cout << "Test5\n";
     }
 }
