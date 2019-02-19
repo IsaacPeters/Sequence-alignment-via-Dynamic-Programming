@@ -42,7 +42,7 @@ Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs
 
 
     // Compute base cases
-    distances[0][0] = costs[getIndexOfDNA(firstSequence.at(0))][getIndexOfDNA(firstSequence.at(0))];
+    distances[0][0] = costs[getIndexOfDNA(firstSequence.at(0))][getIndexOfDNA(secondSequence.at(0))];
     for (int i = 1; i < firstSequence.length(); i++) {
         distances[i][0] = distances[i-1][0] + costs[0][getIndexOfDNA(firstSequence.at(i))];
     }
@@ -92,20 +92,20 @@ Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs
         }
     }
 
-    cout << "\nThird Test: \n";
+    // cout << "\nThird Test: \n";
 
-    for (int i = 0; i < firstSequence.length(); i++) {
-        for (int j = 0; j < secondSequence.length(); j++) {
-            cout << distances[i][j] << " ";
-        }
-        cout << "\n";
-    }
-    for (int i = 0; i < firstSequence.length(); i++) {
-        for (int j = 0; j < secondSequence.length(); j++) {
-            cout << backTrace[i][j] << " ";
-        }
-        cout << "\n";
-    }
+    // for (int i = 0; i < firstSequence.length(); i++) {
+    //     for (int j = 0; j < secondSequence.length(); j++) {
+    //         cout << distances[i][j] << " ";
+    //     }
+    //     cout << "\n";
+    // }
+    // for (int i = 0; i < firstSequence.length(); i++) {
+    //     for (int j = 0; j < secondSequence.length(); j++) {
+    //         cout << backTrace[i][j] << " ";
+    //     }
+    //     cout << "\n";
+    // }
     
     // Store the optimal edit distance in our result
     optimalResult.editDistance = distances[firstSequence.length()-1][secondSequence.length()-1];
@@ -113,7 +113,7 @@ Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs
     // Compute the backtrace, to get our final string!
     int i = firstSequence.length() - 1;
     int j = secondSequence.length() - 1;
-    while (i >= 0 && i >= 0) {
+    while (i > 0 || j > 0) {
         // cout << "i: " << i << ", j: " << j << "\n";
 
         if (backTrace[i][j] == downbtr) {

@@ -16,8 +16,6 @@ int main()
 {
     
 
-    // Start a timer
-    clock_t startClock = clock();
 
     // Get the costs from cost file, only needs to happen once.
     // Will probably pass this off when we call alignment
@@ -44,7 +42,7 @@ int main()
     }
     
     // Create input file for our strings
-    ifstream inFile("imp2input.txt");
+    ifstream inFile("imp2input_our.txt");
     if( !inFile.is_open() ) {
         cout << "Error opening file" << endl;
         return 1;
@@ -57,11 +55,14 @@ int main()
         return 1;
     }
     int i = 0; 
-    while (/*!inFile.eof()*/ i < 1) {
+    while (!inFile.eof()) {
         i++;
         // get a line, will be of the form XXXX,XXXX (number of X's unknown). Store it in temp
         string temp;
         inFile >> temp;
+        // break if this is empty
+        if (temp == "")
+            break;
 
         // Get index of the comma, split string of characters in half
         int commaIndex = temp.find(",");    
@@ -70,16 +71,29 @@ int main()
         string firstSequence = temp.substr(0, commaIndex);
         string secondSequence = temp.substr(commaIndex + 1);
 
+        cout << "Test1\n";
+
+
+        // Start a timer
+        clock_t startClock = clock();
+
         // Take these strings and give them to our alignment function to be aligned...
         // alignedString = alignment(firstSequence, secondSequence);
+        cout << "Test2\n";
         Result_t alignment = alignDNA(firstSequence, secondSequence, costs);
+        cout << "Test3\n";
+
+        // Find the time we timed :)
+        clock_t clockDuration = clock() - startClock;
+        double seconds = 1.0 * clockDuration / CLOCKS_PER_SEC;
+        cout << "\nTrial #" << i << " time: " << seconds << "\n";
 
         // Store that bad boy in our output file
-        outFile << alignment.finalString << ":" << alignment.editDistance << "\n";
-    }
 
-    // Find the time we timed :)
-    clock_t clockDuration = clock() - startClock;
-    double seconds = 1.0 * clockDuration / CLOCKS_PER_SEC;
-    cout << "\nIn " << seconds << " seconds, we completed finding the sequence alignment!\n";
+
+        cout << "Test4\n";
+        outFile << alignment.finalString << ":" << alignment.editDistance << "\n";
+
+        cout << "Test5\n";
+    }
 }
