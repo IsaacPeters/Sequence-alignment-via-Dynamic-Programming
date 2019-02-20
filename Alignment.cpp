@@ -1,6 +1,9 @@
 #include <iostream>
+<<<<<<< HEAD
 #include <vector>
 #include <algorithm>
+=======
+>>>>>>> parent of 984f38e... Works and no seg fault, done???
 #include "Alignment.h"
 
 using namespace std;
@@ -23,25 +26,15 @@ int getIndexOfDNA(char DNA) {
 }
 
 Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs)[costDim - 1][costDim - 1]) {
-    // Create and setup vectors
-    vector< vector<int> > distances;
-    vector< vector<int> > backTrace;
 
-    // Setup backtrace and distance vectors
-    for(int i = 0; i < firstSequence.length(); ++i){
-        vector<int> row(secondSequence.length());
+        cout << "Test0.1\n";
+    int distances[firstSequence.length()][secondSequence.length()] = {{0}};
 
-            for(int j = 0; j < secondSequence.length(); ++j){
-                row[j] = 0;
-            }
+        cout << "Test0.2\n";
+    int backTrace[firstSequence.length()][secondSequence.length()] = {{0}};
 
-        distances.push_back(row); // push each row after you fill it
-        backTrace.push_back(row); // push each row after you fill it
-    }
-
-
+        cout << "Test0.3\n";
     Result_t optimalResult;
-
 
     // Setup backTrace
     for (int i = 1; i < firstSequence.length(); i++) {
