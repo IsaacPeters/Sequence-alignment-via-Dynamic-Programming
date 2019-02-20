@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "Alignment.h"
 
 using namespace std;
@@ -40,13 +41,6 @@ Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs
 
 
     Result_t optimalResult;
-        
-    // for (int i = 0; i < costDim - 1; i++) {
-    //     for (int j = 0; j < costDim - 1; j++) {
-    //         cout << costs[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
 
 
     // Setup backTrace
@@ -66,15 +60,6 @@ Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs
     for (int j = 1; j < secondSequence.length(); j++) {
         distances[0][j] = distances[0][j-1] + costs[0][getIndexOfDNA(secondSequence.at(j))];
     }
-
-    // cout << "\nSecond Test: \n";
-
-    // for (int i = 0; i < firstSequence.length(); i++) {
-    //     for (int j = 0; j < secondSequence.length(); j++) {
-    //         cout << distances[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
 
     for (int i = 1; i < firstSequence.length(); i++) {
         for (int j = 1; j < secondSequence.length(); j++) {
@@ -108,21 +93,6 @@ Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs
             }
         }
     }
-
-    // cout << "\nThird Test: \n";
-
-    // for (int i = 0; i < firstSequence.length(); i++) {
-    //     for (int j = 0; j < secondSequence.length(); j++) {
-    //         cout << distances[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
-    // for (int i = 0; i < firstSequence.length(); i++) {
-    //     for (int j = 0; j < secondSequence.length(); j++) {
-    //         cout << backTrace[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
     
     // Store the optimal edit distance in our result
     optimalResult.editDistance = distances[firstSequence.length()-1][secondSequence.length()-1];
@@ -130,31 +100,36 @@ Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs
     // Compute the backtrace, to get our final string!
     int i = firstSequence.length() - 1;
     int j = secondSequence.length() - 1;
+    string firstFinal;
+    string secondFinal;
     while (i > 0 || j > 0) {
-        // cout << "i: " << i << ", j: " << j << "\n";
 
         if (backTrace[i][j] == downbtr) {
             // Put an empty space in j
-            secondSequence.insert(j+1, "-");
+            firstFinal += firstSequence.at(i);
+            secondFinal += "-";
             i--; 
             
         } else if (backTrace[i][j] == leftbtr) {
             // Put an empty space in i
-            firstSequence.insert(i+1, "-");
+            firstFinal += "-";
+            secondFinal += secondSequence.at(j);
             j--; 
 
         } else if (backTrace[i][j] == alignbtr) {
             // These characters are OK lined up
+            firstFinal += firstSequence.at(i);
+            secondFinal += secondSequence.at(j);
             i--; 
             j--;
         }
     }
 
     // Finalize our string and save it in our result
-    firstSequence.append("," + secondSequence);
-    optimalResult.finalString = firstSequence;
-
-    // cout << "tests\n";
+    reverse(firstFinal.begin(), firstFinal.end());
+    reverse(secondFinal.begin(), secondFinal.end());
+    firstFinal.append("," + secondFinal);
+    optimalResult.finalString = firstFinal;
 
     return optimalResult;
 

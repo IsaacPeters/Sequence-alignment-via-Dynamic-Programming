@@ -50,7 +50,12 @@ int main()
     
     // Create output file for our optimized
     ofstream outFile("imp2output.txt");
-    if( !inFile.is_open() ) {
+    if( !outFile.is_open() ) {
+        cout << "Error opening file" << endl;
+        return 1;
+    }
+    ofstream timesFile("imp2times.txt");
+    if( !timesFile.is_open() ) {
         cout << "Error opening file" << endl;
         return 1;
     }
@@ -82,7 +87,8 @@ int main()
         // Find the time we timed :)
         clock_t clockDuration = clock() - startClock;
         double seconds = 1.0 * clockDuration / CLOCKS_PER_SEC;
-        cout << "\nTrial #" << i << " time: " << seconds << "\n";
+        cout << "Trial #" << i << " time: " << seconds << "\n";
+        timesFile << i << ",\t" << seconds << "\n";
 
         // Store that bad boy in our output file
 
