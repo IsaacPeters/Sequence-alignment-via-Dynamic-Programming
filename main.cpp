@@ -42,7 +42,7 @@ int main()
     }
     
     // Create input file for our strings
-    ifstream inFile("imp2input_our.txt");
+    ifstream inFile("imp2input.txt");
     if( !inFile.is_open() ) {
         cout << "Error opening file" << endl;
         return 1;

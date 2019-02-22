@@ -2,7 +2,7 @@ import sys
 import math
 import random
 
-generateLengths = [500, 1000, 2000, 4000, 5000]
+generateLengths = [500, 1000, 2000, 4000, 5000, 8000, 11000, 15000]
 
 def getDNA(x):
     if x == 1:

@@ -125,11 +125,8 @@ Result_t alignDNA(string firstSequence, string secondSequence, const int (&costs
 
 
     // Finalize our string and save it in our result
-    //cout << firstFinal << "\n" << secondFinal << "\n";
     reverse(firstFinal.begin(), firstFinal.end());
     reverse(secondFinal.begin(), secondFinal.end());
-    cout << firstSequence << "\n" << secondSequence << "\n";
-    cout << firstFinal << "\n" << secondFinal << "\n";
     firstFinal.append("," + secondFinal);
     optimalResult.finalString = firstFinal;
 
